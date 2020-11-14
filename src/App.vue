@@ -19,7 +19,7 @@ import { isEmpty } from "@/utils/common";
 export default defineComponent({
   name: "App",
   components: {
-    PageLoadProgress
+    PageLoadProgress,
   },
   setup() {
     const router = useRouter();
@@ -43,9 +43,9 @@ export default defineComponent({
     return {
       locale,
       loadProgress,
-      transformCellText
+      transformCellText,
     };
-  }
+  },
 });
 </script>
 

@@ -4,6 +4,8 @@ import auth from "./auth";
 import home from "./home";
 import user from "./user";
 import system from "./system";
+import task from "./task";
+
 
 export default createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -11,13 +13,13 @@ export default createRouter({
     {
       path: "/",
       name: "Index",
-      redirect: "/home"
+      redirect: "/task/create",
     },
-
+    ...task,
     ...auth,
     ...home,
     ...user,
     ...system,
-    ...error
-  ]
+    ...error,
+  ],
 });

@@ -15,6 +15,6 @@ app.use(Axios);
 app.use(Antd);
 
 // 加载拦截器
-Interceptor.setup(Router);
+// Interceptor.setup(Router);
 
 app.mount("#app");

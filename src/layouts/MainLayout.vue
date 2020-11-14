@@ -22,7 +22,7 @@
         @click="menuClickHandle"
       >
         <template v-for="item of menuTree" :key="item.id">
-          <sidebar-menu :data="item" :filter="menu => menu.type === MenuType.Menu" />
+          <sidebar-menu :data="item" :filter="(menu) => menu.type === MenuType.Menu" />
         </template>
       </a-menu>
     </a-layout-sider>
@@ -101,7 +101,7 @@ import {
   HomeOutlined,
   UserOutlined,
   LockOutlined,
-  LogoutOutlined
+  LogoutOutlined,
 } from "@ant-design/icons-vue";
 
 export default defineComponent({
@@ -113,7 +113,7 @@ export default defineComponent({
     HomeOutlined,
     UserOutlined,
     LockOutlined,
-    LogoutOutlined
+    LogoutOutlined,
   },
   setup() {
     const route = useRoute();
@@ -123,12 +123,12 @@ export default defineComponent({
     // 计算菜单IdMap
     const menuIdMap = computed(() => {
       const menuMap = store.getters["menu/menuMap"];
-      return menuMap(menu => menu.id);
+      return menuMap((menu) => menu.id);
     });
 
     // 计算当前路由菜单树
     const currentMenuTree = computed(() => {
-      const findParentList = menu => {
+      const findParentList = (menu) => {
         let list: any[] = [];
         const { parentId } = menu;
         if (parentId) {
@@ -157,15 +157,15 @@ export default defineComponent({
       openKeys: [] as Array<any>,
       selectedKeys: computed(() => [currentMenuTree.value[0]?.id ?? -1]),
       menuTree: computed(() => store.state.menu.menuTree),
-      breadcrumbs: computed(() => currentMenuTree.value?.map(item => item.name).reverse()),
-      user: computed(() => store.state.auth.user)
+      breadcrumbs: computed(() => currentMenuTree.value?.map((item) => item.name).reverse()),
+      user: computed(() => store.state.auth.user),
     });
 
     // 监听当前菜单变化自动展开父级菜单
-    watch(currentMenuTree, val => {
+    watch(currentMenuTree, (val) => {
       if (val.length == 0) return;
 
-      const openMenuIds = val.slice(1).map(item => item.id);
+      const openMenuIds = val.slice(1).map((item) => item.id);
       for (let openMenuId of openMenuIds) {
         const openKeys = state.openKeys;
         if (!openKeys.includes(openMenuId)) {
@@ -197,13 +197,13 @@ export default defineComponent({
       ...toRefs(state),
       menuClickHandle,
       isEmpty,
-      MenuType
+      MenuType,
     };
-  }
+  },
 });
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import "~ant-design-vue/lib/style/themes";
 
 .main-layout {
